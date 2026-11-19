@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Macizo — informe de frente</title>
+  <meta name="description" content="El RMR lo calcula el código. El informe lo redacta un modelo, sobre la ficha ya calculada." />
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <header class="cabeza">
+    <p class="marca">Macizo</p>
+    <h1>Del mapeo al párrafo, sin inventar el número.</h1>
+    <p class="baja">El RMR89 se calcula aquí, con los cortes de Bieniawski 1989. El modelo solo redacta esa ficha. No diseña pernos ni shotcrete.</p>
+  </header>
+
+  <main>
+    <form id="ficha" class="hoja">
+      <label>Frente
+        <input name="frente" maxlength="120" placeholder="Nv 2450, crucero 3" />
+      </label>
+      <label>UCS de la roca intacta (MPa)
+        <input name="ucs_mpa" type="number" min="0" max="400" step="1" value="70" required />
+      </label>
+      <label>RQD (%)
+        <input name="rqd" type="number" min="0" max="100" step="1" value="60" required />
+      </label>
+      <label>Espaciado medio (m)
+        <input name="espaciado_m" type="number" min="0" max="20" step="0.01" value="0.3" required />
+      </label>
+      <label>Discontinuidades
+        <select name="condicion">
+          <option value="muy_buena">Muy buena (30)</option>
+          <option value="buena">Buena (25)</option>
+          <option value="regular" selected>Regular (20)</option>
+          <option value="pobre">Pobre (10)</option>
+          <option value="muy_pobre">Muy pobre (0)</option>
+        </select>
+      </label>
+      <label>Agua
+        <select name="agua">
+          <option value="seca">Seca (15)</option>
+          <option value="humeda" selected>Húmeda (10)</option>
+          <option value="mojada">Mojada (7)</option>
+          <option value="goteo">Goteo (4)</option>
+          <option value="flujo">Flujo (0)</option>
+        </select>
+      </label>
+      <label>Obra
+        <select name="obra">
+          <option value="tunel" selected>Túnel</option>
+          <option value="cimentacion">Cimentación</option>
+          <option value="talud">Talud</option>
+        </select>
+      </label>
+      <label>Orientación de las discontinuidades
+        <select name="orientacion">
+          <option value="muy_favorable">Muy favorable</option>
+          <option value="favorable">Favorable</option>
+          <option value="regular" selected>Regular</option>
+          <option value="desfavorable">Desfavorable</option>
+          <option value="muy_desfavorable">Muy desfavorable</option>
+        </select>
+      </label>
+      <div class="acciones">
+        <button type="submit">Calcular</button>
+        <button type="button" id="redactar">Redactar informe</button>
+      </div>
+      <p id="estado" class="estado" role="status"></p>
+    </form>
+
+    <section id="resultado" class="resultado" hidden>
+      <p class="kicker" id="frente-nombre"></p>
+      <p class="nota" id="rmr-numero"></p>
+      <p class="clase" id="clase-nombre"></p>
+      <ul id="parciales"></ul>
+      <p class="ajuste" id="ajuste"></p>
+      <p class="autosoporte" id="autosoporte"></p>
+      <article id="informe" hidden>
+        <h2>Informe</h2>
+        <p id="lectura"></p>
+        <ul id="mirar"></ul>
+        <p id="limite" class="limite"></p>
+      </article>
+      <form id="pregunta-form" class="pregunta" hidden>
+        <label>Pregunta sobre este frente
+          <input name="pregunta" maxlength="600" placeholder="¿Qué miro primero si el agua aumenta?" />
+        </label>
+        <button type="submit">Preguntar</button>
+      </form>
+      <p class="aviso" id="aviso"></p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
